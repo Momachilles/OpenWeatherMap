@@ -14,6 +14,7 @@
 		4E19BDEE2BCD3CBC00063AC5 /* OpenWeatherMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E19BDED2BCD3CBC00063AC5 /* OpenWeatherMapTests.swift */; };
 		4E19BDF82BCD3CBC00063AC5 /* OpenWeatherMapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E19BDF72BCD3CBC00063AC5 /* OpenWeatherMapUITests.swift */; };
 		4E19BDFA2BCD3CBC00063AC5 /* OpenWeatherMapUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E19BDF92BCD3CBC00063AC5 /* OpenWeatherMapUITestsLaunchTests.swift */; };
+		4E19BE0A2BCD74FB00063AC5 /* FiveDaysForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E19BE092BCD74FB00063AC5 /* FiveDaysForecast.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		4E19BDF32BCD3CBC00063AC5 /* OpenWeatherMapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenWeatherMapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E19BDF72BCD3CBC00063AC5 /* OpenWeatherMapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherMapUITests.swift; sourceTree = "<group>"; };
 		4E19BDF92BCD3CBC00063AC5 /* OpenWeatherMapUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherMapUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4E19BE092BCD74FB00063AC5 /* FiveDaysForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDaysForecast.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 		4E19BDDB2BCD3CBB00063AC5 /* OpenWeatherMap */ = {
 			isa = PBXGroup;
 			children = (
+				4E19BE062BCD74AD00063AC5 /* Model */,
 				4E19BDDC2BCD3CBB00063AC5 /* OpenWeatherMapApp.swift */,
 				4E19BDDE2BCD3CBB00063AC5 /* ContentView.swift */,
 				4E19BDE02BCD3CBC00063AC5 /* Assets.xcassets */,
@@ -125,6 +128,14 @@
 				4E19BDF92BCD3CBC00063AC5 /* OpenWeatherMapUITestsLaunchTests.swift */,
 			);
 			path = OpenWeatherMapUITests;
+			sourceTree = "<group>";
+		};
+		4E19BE062BCD74AD00063AC5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4E19BE092BCD74FB00063AC5 /* FiveDaysForecast.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,6 +270,7 @@
 			files = (
 				4E19BDDF2BCD3CBB00063AC5 /* ContentView.swift in Sources */,
 				4E19BDDD2BCD3CBB00063AC5 /* OpenWeatherMapApp.swift in Sources */,
+				4E19BE0A2BCD74FB00063AC5 /* FiveDaysForecast.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
