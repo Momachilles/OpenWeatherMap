@@ -18,6 +18,11 @@
 		4E19BE102BCD798500063AC5 /* FiveDaysForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E19BE0F2BCD798500063AC5 /* FiveDaysForecastView.swift */; };
 		4E19BE132BCD79EF00063AC5 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E19BE122BCD79EF00063AC5 /* WeatherViewModel.swift */; };
 		4E19BE172BCD857B00063AC5 /* OpenWeatherMapClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E19BE162BCD857B00063AC5 /* OpenWeatherMapClient.swift */; };
+		4E19BE1B2BCD8A6000063AC5 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 4E19BE1A2BCD8A6000063AC5 /* RxBlocking */; };
+		4E19BE1D2BCD8A6000063AC5 /* RxBlocking-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 4E19BE1C2BCD8A6000063AC5 /* RxBlocking-Dynamic */; };
+		4E19BE1F2BCD8A6000063AC5 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 4E19BE1E2BCD8A6000063AC5 /* RxCocoa */; };
+		4E19BE212BCD8A6000063AC5 /* RxCocoa-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 4E19BE202BCD8A6000063AC5 /* RxCocoa-Dynamic */; };
+		4E19BE232BCD8A6000063AC5 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 4E19BE222BCD8A6000063AC5 /* RxRelay */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +64,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E19BE232BCD8A6000063AC5 /* RxRelay in Frameworks */,
+				4E19BE212BCD8A6000063AC5 /* RxCocoa-Dynamic in Frameworks */,
+				4E19BE1F2BCD8A6000063AC5 /* RxCocoa in Frameworks */,
+				4E19BE1B2BCD8A6000063AC5 /* RxBlocking in Frameworks */,
+				4E19BE1D2BCD8A6000063AC5 /* RxBlocking-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,6 +213,13 @@
 			dependencies = (
 			);
 			name = OpenWeatherMap;
+			packageProductDependencies = (
+				4E19BE1A2BCD8A6000063AC5 /* RxBlocking */,
+				4E19BE1C2BCD8A6000063AC5 /* RxBlocking-Dynamic */,
+				4E19BE1E2BCD8A6000063AC5 /* RxCocoa */,
+				4E19BE202BCD8A6000063AC5 /* RxCocoa-Dynamic */,
+				4E19BE222BCD8A6000063AC5 /* RxRelay */,
+			);
 			productName = OpenWeatherMap;
 			productReference = 4E19BDD92BCD3CBB00063AC5 /* OpenWeatherMap.app */;
 			productType = "com.apple.product-type.application";
@@ -275,6 +292,9 @@
 				Base,
 			);
 			mainGroup = 4E19BDD02BCD3CBB00063AC5;
+			packageReferences = (
+				4E19BE192BCD8A6000063AC5 /* XCRemoteSwiftPackageReference "RxSwift" */,
+			);
 			productRefGroup = 4E19BDDA2BCD3CBB00063AC5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -652,6 +672,45 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4E19BE192BCD8A6000063AC5 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4E19BE1A2BCD8A6000063AC5 /* RxBlocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E19BE192BCD8A6000063AC5 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxBlocking;
+		};
+		4E19BE1C2BCD8A6000063AC5 /* RxBlocking-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E19BE192BCD8A6000063AC5 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = "RxBlocking-Dynamic";
+		};
+		4E19BE1E2BCD8A6000063AC5 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E19BE192BCD8A6000063AC5 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		4E19BE202BCD8A6000063AC5 /* RxCocoa-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E19BE192BCD8A6000063AC5 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = "RxCocoa-Dynamic";
+		};
+		4E19BE222BCD8A6000063AC5 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E19BE192BCD8A6000063AC5 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4E19BDD12BCD3CBB00063AC5 /* Project object */;
 }
