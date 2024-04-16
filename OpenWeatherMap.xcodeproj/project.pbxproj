@@ -25,6 +25,8 @@
 		4E19BE232BCD8A6000063AC5 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 4E19BE222BCD8A6000063AC5 /* RxRelay */; };
 		4E19BE262BCD8B9100063AC5 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E19BE252BCD8B9100063AC5 /* NetworkService.swift */; };
 		4E19BE292BCD8DE900063AC5 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E19BE282BCD8DE900063AC5 /* Endpoint.swift */; };
+		4E19BE2B2BCE5AB300063AC5 /* OpenWeatherMapEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E19BE2A2BCE5AB300063AC5 /* OpenWeatherMapEndpoint.swift */; };
+		4E19BE2E2BCE5AE600063AC5 /* FiveDaysForecastEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E19BE2D2BCE5AE600063AC5 /* FiveDaysForecastEndpoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		4E19BE162BCD857B00063AC5 /* OpenWeatherMapClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherMapClient.swift; sourceTree = "<group>"; };
 		4E19BE252BCD8B9100063AC5 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		4E19BE282BCD8DE900063AC5 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		4E19BE2A2BCE5AB300063AC5 /* OpenWeatherMapEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherMapEndpoint.swift; sourceTree = "<group>"; };
+		4E19BE2D2BCE5AE600063AC5 /* FiveDaysForecastEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDaysForecastEndpoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,9 +218,19 @@
 		4E19BE272BCD8DDA00063AC5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4E19BE2C2BCE5AD000063AC5 /* Endpoints */,
 				4E19BE282BCD8DE900063AC5 /* Endpoint.swift */,
+				4E19BE2A2BCE5AB300063AC5 /* OpenWeatherMapEndpoint.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		4E19BE2C2BCE5AD000063AC5 /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				4E19BE2D2BCE5AE600063AC5 /* FiveDaysForecastEndpoint.swift */,
+			);
+			path = Endpoints;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -364,8 +378,10 @@
 				4E19BE292BCD8DE900063AC5 /* Endpoint.swift in Sources */,
 				4E19BE172BCD857B00063AC5 /* OpenWeatherMapClient.swift in Sources */,
 				4E19BDDD2BCD3CBB00063AC5 /* OpenWeatherMapApp.swift in Sources */,
+				4E19BE2B2BCE5AB300063AC5 /* OpenWeatherMapEndpoint.swift in Sources */,
 				4E19BE102BCD798500063AC5 /* FiveDaysForecastView.swift in Sources */,
 				4E19BE0A2BCD74FB00063AC5 /* FiveDaysForecast.swift in Sources */,
+				4E19BE2E2BCE5AE600063AC5 /* FiveDaysForecastEndpoint.swift in Sources */,
 				4E19BE262BCD8B9100063AC5 /* NetworkService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
