@@ -164,7 +164,6 @@
 		4E19BE0B2BCD780E00063AC5 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				4E19BE272BCD8DDA00063AC5 /* Model */,
 				4E19BE242BCD8B7C00063AC5 /* Service */,
 				4E19BE152BCD855700063AC5 /* Client */,
 			);
@@ -191,6 +190,7 @@
 		4E19BE152BCD855700063AC5 /* Client */ = {
 			isa = PBXGroup;
 			children = (
+				4E19BE272BCD8DDA00063AC5 /* Model */,
 				4E19BE162BCD857B00063AC5 /* OpenWeatherMapClient.swift */,
 			);
 			path = Client;
@@ -199,6 +199,7 @@
 		4E19BE242BCD8B7C00063AC5 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				4E19BE302BCED7AD00063AC5 /* Model */,
 				4E19BE252BCD8B9100063AC5 /* NetworkService.swift */,
 			);
 			path = Service;
@@ -208,7 +209,6 @@
 			isa = PBXGroup;
 			children = (
 				4E19BE2C2BCE5AD000063AC5 /* Endpoints */,
-				4E19BE282BCD8DE900063AC5 /* Endpoint.swift */,
 				4E19BE2A2BCE5AB300063AC5 /* OpenWeatherMapEndpoint.swift */,
 			);
 			path = Model;
@@ -220,6 +220,14 @@
 				4E19BE2D2BCE5AE600063AC5 /* FiveDaysForecastEndpoint.swift */,
 			);
 			path = Endpoints;
+			sourceTree = "<group>";
+		};
+		4E19BE302BCED7AD00063AC5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4E19BE282BCD8DE900063AC5 /* Endpoint.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
