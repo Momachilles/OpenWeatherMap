@@ -9,7 +9,7 @@ import Foundation
 
 protocol OpenWeatherMapEndpoint: Endpoint, URLRequestable {}
 extension OpenWeatherMapEndpoint {
-  var scheme: String { "http" }
+  var scheme: String { "https" }
   var host: String { "api.openweathermap.org" }
-  var baseURLString: String { "data/2.5" }
+  var baseURLString: String { "/data/2.5" }
 }
