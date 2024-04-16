@@ -6,11 +6,23 @@
 //
 
 import Foundation
+import RxSwift
 
 protocol FiveDaysForecastAPI {
-  func fiveDaysForeCast()
+  func fiveDaysForecast(for city: String) async throws -> FiveDaysForecast
 }
 
+
 class OpenWeatherMapClient {
+  private let networkService: NetworkServiceProtocol
   
+  init(networkService: NetworkServiceProtocol) {
+    self.networkService = networkService
+  }
+}
+
+extension OpenWeatherMapClient: FiveDaysForecastAPI {
+  func fiveDaysForecast(for city: String) async throws -> FiveDaysForecast {
+    try await networkService.request(FiveDaysForecastEndpoint(city: city)).value
+  }
 }
