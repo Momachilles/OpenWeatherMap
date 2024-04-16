@@ -118,10 +118,10 @@
 		4E19BDDB2BCD3CBB00063AC5 /* OpenWeatherMap */ = {
 			isa = PBXGroup;
 			children = (
+				4E19BDDC2BCD3CBB00063AC5 /* OpenWeatherMapApp.swift */,
 				4E19BE0C2BCD794F00063AC5 /* View */,
 				4E19BE0B2BCD780E00063AC5 /* Network */,
 				4E19BE062BCD74AD00063AC5 /* Model */,
-				4E19BDDC2BCD3CBB00063AC5 /* OpenWeatherMapApp.swift */,
 				4E19BDE02BCD3CBC00063AC5 /* Assets.xcassets */,
 				4E19BDE22BCD3CBC00063AC5 /* Preview Content */,
 			);

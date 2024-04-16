@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
   var body: some View {
     FiveDaysForecastView()
+      .environment(OpenWeatherMapClient(networkService: NetworkService()))
   }
 }
 

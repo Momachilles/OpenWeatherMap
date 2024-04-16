@@ -8,39 +8,64 @@
 import SwiftUI
 
 struct FiveDaysForecastView: View {
-  let client = OpenWeatherMapClient(networkService: NetworkService())
+  @Environment(OpenWeatherMapClient.self) private var api
 
-  @State private var fiveDaysForecast: FiveDaysForecast?
+  enum ViewState {
+    case start
+    case loading
+    case error(_ errorMessage: String)
+    case forecast(_ data: FiveDaysForecast)
+  }
+
+  @State private var viewState: ViewState = .start
   @State private var city: String = "Paris"
-  @State private var errorMessage: String?
 
   var body: some View {
-    HStack {
-      TextField("Enter city", text: $city)
+    VStack {
+      HStack {
+        TextField("Enter city", text: $city)
+          .padding()
+          .textFieldStyle(RoundedBorderTextFieldStyle())
+          .autocapitalization(.words)
+
+        Button("Fetch Weather") {
+          forecast()
+        }
         .padding()
-        .textFieldStyle(RoundedBorderTextFieldStyle())
-        .autocapitalization(.words)
-      
-      Button("Fetch Weather") {
-        forecast()
       }
-      .padding()
-    }
 
-    if let errorMessage = errorMessage {
-      Text("Error: \(errorMessage)")
-        .foregroundColor(.red)
-    }
+      switch viewState {
+      case .start: EmptyView()
+      case .loading:
+        Text("Loading five days forecast for \(city)...")
+      case .error(let errorMessage):
+        Text("Error: \(errorMessage)")
+          .foregroundColor(.red)
+      case .forecast(let forecast):
+        List {
+          ForEach(forecast.list, id: \.dt) { forecast in
+            HStack(alignment: .center) {
+              Text(forecast.dt.forecastDateFormatted)
+              Spacer()
+              Text(forecast.weather[0].main)
+              Spacer()
+              Text("\(Int(forecast.main.temp)) ºC")
+            }
+          }
+        }
+      }
 
-    Spacer()
+      Spacer()
+    }
   }
 
   private func forecast() {
     Task {
       do {
-        fiveDaysForecast = try await client.fiveDaysForecast(for: city)
+        viewState = .loading
+        viewState = .forecast(try await api.fiveDaysForecast(for: city))
       } catch {
-        errorMessage = error.localizedDescription
+        viewState = .error(error.localizedDescription)
       }
     }
   }
@@ -48,4 +73,15 @@ struct FiveDaysForecastView: View {
 
 #Preview {
   FiveDaysForecastView()
+    .environment(OpenWeatherMapClient(networkService: NetworkService()))
+}
+
+extension TimeInterval {
+  var forecastDateFormatted: String {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .short
+    formatter.timeStyle = .short
+
+    return formatter.string(from: Date(timeIntervalSince1970: self))
+  }
 }

@@ -12,7 +12,7 @@ protocol FiveDaysForecastAPI {
   func fiveDaysForecast(for city: String) async throws -> FiveDaysForecast
 }
 
-
+@Observable
 class OpenWeatherMapClient {
   private let networkService: NetworkServiceProtocol
   
