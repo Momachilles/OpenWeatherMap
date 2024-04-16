@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        FiveDaysForecastView(viewModel: FiveDaysForecastViewModel())
-    }
+  var body: some View {
+    FiveDaysForecastView()
+  }
 }
 
 #Preview {

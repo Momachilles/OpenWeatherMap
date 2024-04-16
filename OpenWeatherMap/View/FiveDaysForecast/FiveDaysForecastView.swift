@@ -8,32 +8,44 @@
 import SwiftUI
 
 struct FiveDaysForecastView: View {
-  private let viewModel: FiveDaysForecastViewModelProtocol
-  @State private var city: String = ""
-  
-  init(viewModel: FiveDaysForecastViewModelProtocol) {
-    self.viewModel = viewModel
-  }
-  
+  let client = OpenWeatherMapClient(networkService: NetworkService())
+
+  @State private var fiveDaysForecast: FiveDaysForecast?
+  @State private var city: String = "Paris"
+  @State private var errorMessage: String?
+
   var body: some View {
-    VStack {
-      TextField("Enter City", text: $city, onCommit: {
-        viewModel.fiveDaysForecast(for: city)
-      })
-      .padding()
+    HStack {
+      TextField("Enter city", text: $city)
+        .padding()
+        .textFieldStyle(RoundedBorderTextFieldStyle())
+        .autocapitalization(.words)
       
-      if let weather = viewModel.fiveDaysForecast {
-        Text("Temperature: \(weather.list[0].main.temp) °C")
-        Text("Humidity: \(weather.list[0].main.humidity) %")
-        // Add other weather properties here
-      } else {
-        Text("No data available")
+      Button("Fetch Weather") {
+        forecast()
+      }
+      .padding()
+    }
+
+    if let errorMessage = errorMessage {
+      Text("Error: \(errorMessage)")
+        .foregroundColor(.red)
+    }
+
+    Spacer()
+  }
+
+  private func forecast() {
+    Task {
+      do {
+        fiveDaysForecast = try await client.fiveDaysForecast(for: city)
+      } catch {
+        errorMessage = error.localizedDescription
       }
     }
-    .padding()
   }
 }
 
 #Preview {
-  FiveDaysForecastView(viewModel: FiveDaysForecastViewModel())
+  FiveDaysForecastView()
 }
