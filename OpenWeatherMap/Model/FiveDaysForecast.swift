@@ -7,6 +7,10 @@
 
 import Foundation
 
+protocol Groupable {
+  var groupedList: [(date: String, forecasts: [FiveDaysForecast.Forecast])] { get }
+}
+
 struct FiveDaysForecast: Codable {
   let cod: String
   let message: Double
@@ -73,5 +77,25 @@ struct FiveDaysForecast: Codable {
       let lat: Double
       let lon: Double
     }
+  }
+}
+
+extension FiveDaysForecast: Groupable {
+  var groupedList: [(date: String, forecasts: [FiveDaysForecast.Forecast])] {
+    var groupedForecasts: [(String, [FiveDaysForecast.Forecast])] = []
+
+    for forecast in list {
+      let dayKey = forecast.dt.dateString
+
+      if let index = groupedForecasts.firstIndex(where: { $0.0 == dayKey }) {
+        // Append to existing group
+        groupedForecasts[index].1.append(forecast)
+      } else {
+        // Create a new group
+        groupedForecasts.append((dayKey, [forecast]))
+      }
+    }
+
+    return groupedForecasts
   }
 }
