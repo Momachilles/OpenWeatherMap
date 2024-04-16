@@ -12,7 +12,6 @@ enum NetworkError: Error {
   case invalidURL
   case invalidResponse
   case requestFailed(Error)
-  // Add more cases as needed
 }
 
 protocol NetworkServiceProtocol {
@@ -28,19 +27,11 @@ class NetworkService: NetworkServiceProtocol {
     
     URLSession.shared.dataTask(with: urlRequest) { data, response, error in
       guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-        completion(.failure(.invalidResponse))
-        return
+        return completion(.failure(.invalidResponse))
       }
       
-      if let error = error {
-        completion(.failure(.requestFailed(error)))
-        return
-      }
-      
-      guard let data = data else {
-        completion(.failure(.invalidResponse))
-        return
-      }
+      if let error = error { return completion(.failure(.requestFailed(error))) }
+      guard let data = data else { return completion(.failure(.invalidResponse)) }
       
       do {
         let decodedResponse = try JSONDecoder().decode(T.self, from: data)
