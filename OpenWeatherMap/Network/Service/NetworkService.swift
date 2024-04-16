@@ -11,56 +11,46 @@ import RxCocoa
 
 enum NetworkError: Error {
   case invalidURL
-  case invalidResponse(URLResponse)
+  case invalidResponse(URLResponse?)
+  case emptyData
   case requestFailed(Error)
   case invalidJSON(Error)
 }
 
 protocol NetworkServiceProtocol {
-  func request<T: Decodable>(_ requestConvertible: URLRequestable) -> Observable<T>
+  func request<T: Decodable>(_ requestConvertible: URLRequestable) -> Single<T>
 }
 
 class NetworkService: NetworkServiceProtocol {
-  func request<T: Decodable>(_ requestConvertible: URLRequestable) -> Observable<T> {
-    guard let urlRequest = requestConvertible.urlRequest else {
-      return Observable.error(NetworkError.invalidURL)
-    }
-    
-    /*
-    return URLSession.shared.rx.response(request: urlRequest)
-      .map { response, data in
+  func request<T: Decodable>(_ requestConvertible: any URLRequestable) -> Single<T> {
+    return Single.create { single in
+      guard let urlRequest = requestConvertible.urlRequest else {
+        single(.failure(NetworkError.invalidURL))
+        return Disposables.create()
+      }
+
+      let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+        if let error = error { return single(.failure(NetworkError.requestFailed(error))) }
+
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-          throw NetworkError.invalidResponse
+          return single(.failure(NetworkError.invalidResponse(response)))
         }
-        return data
-      }
-      .map { data in
+
+        guard let data = data else { return single(.failure(NetworkError.emptyData)) }
+
         do {
-          return try JSONDecoder().decode(T.self, from: data)
-        } catch {
-          throw NetworkError.invalidResponse
-        }
-      }
-      .catch { error in
-        return Observable.error(NetworkError.requestFailed(error))
-      } */
-    return URLSession.shared.rx.response(request: urlRequest)
-      .map { result -> Data in
-        guard result.response.statusCode == 200 else {
-          throw NetworkError.invalidResponse(result.response)
-        }
-        return result.data
-      }.map { data in
-        do {
-          let posts = try JSONDecoder().decode(
-            T.self, from: data
-          )
-          return posts
+          let decodedResponse = try JSONDecoder().decode(T.self, from: data)
+          single(.success(decodedResponse))
         } catch let error {
-          throw NetworkError.invalidJSON(error)
+          single(.failure(NetworkError.invalidJSON(error)))
         }
       }
-      .observe(on: MainScheduler.instance)
-      .asObservable()
+
+      task.resume()
+
+      return Disposables.create {
+        task.cancel()
+      }
+    }
   }
 }
