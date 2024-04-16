@@ -41,15 +41,22 @@ struct FiveDaysForecastView: View {
       case .error(let errorMessage):
         Text("Error: \(errorMessage)")
           .foregroundColor(.red)
-      case .forecast(let forecast):
+      case .forecast(let fiveDaysForecast):
         List {
-          ForEach(forecast.list, id: \.dt) { forecast in
-            HStack(alignment: .center) {
-              Text(forecast.dt.forecastDateFormatted)
-              Spacer()
-              Text(forecast.weather[0].main)
-              Spacer()
-              Text("\(Int(forecast.main.temp)) ºC")
+          ForEach(fiveDaysForecast.groupedList, id: \.date) { date, forecasts in
+            Section(header:
+              Text(date)
+              .font(.title2)
+            ) {
+              ForEach(forecasts, id: \.dt) { forecast in
+                HStack(alignment: .center) {
+                  Text(forecast.dt.timeString)
+                  Spacer()
+                  Text(forecast.weather[0].main)
+                  Spacer()
+                  Text("\(Int(forecast.main.temp)) ºC")
+                }
+              }
             }
           }
         }
@@ -80,6 +87,22 @@ extension TimeInterval {
   var forecastDateFormatted: String {
     let formatter = DateFormatter()
     formatter.dateStyle = .short
+    formatter.timeStyle = .short
+
+    return formatter.string(from: Date(timeIntervalSince1970: self))
+  }
+
+  var dateString: String {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .short
+    formatter.timeStyle = .none
+
+    return formatter.string(from: Date(timeIntervalSince1970: self))
+  }
+
+  var timeString: String {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .none
     formatter.timeStyle = .short
 
     return formatter.string(from: Date(timeIntervalSince1970: self))
