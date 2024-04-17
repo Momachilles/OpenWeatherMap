@@ -38,6 +38,7 @@ struct FiveDaysForecastView: View {
       case .start: EmptyView()
       case .loading:
         Text("Loading five days forecast for \(city)...")
+        ProgressView()
       case .error(let errorMessage):
         Text("Error: \(errorMessage)")
           .foregroundColor(.red)
