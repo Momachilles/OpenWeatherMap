@@ -18,11 +18,12 @@ enum NetworkError: Error {
 }
 
 protocol NetworkServiceProtocol {
-  func request<T: Decodable>(_ requestConvertible: URLRequestable) -> Single<T>
+  func request<T: Decodable>(from requestConvertible: URLRequestable) -> Single<T>
+  func data(from requestConvertible: URLRequestable) -> Observable<Data>
 }
 
 class NetworkService: NetworkServiceProtocol {
-  func request<T: Decodable>(_ requestConvertible: any URLRequestable) -> Single<T> {
+  func request<T: Decodable>(from requestConvertible: any URLRequestable) -> Single<T> {
     return Single.create { single in
       guard let urlRequest = requestConvertible.urlRequest else {
         single(.failure(NetworkError.invalidURL))
@@ -48,9 +49,34 @@ class NetworkService: NetworkServiceProtocol {
 
       task.resume()
 
-      return Disposables.create {
-        task.cancel()
+      return Disposables.create { task.cancel() }
+    }
+  }
+
+  func data(from requestConvertible: any URLRequestable) -> Observable<Data> {
+    return Observable.create { observer in
+      guard let urlRequest = requestConvertible.urlRequest else {
+        observer.onError(NetworkError.invalidURL)
+
+        return Disposables.create()
       }
+
+      let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+        if let error = error { return observer.onError(NetworkError.requestFailed(error)) }
+
+        guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
+          return observer.onError(NetworkError.invalidResponse(response))
+        }
+
+        guard let data = data else { return observer.onError(NetworkError.emptyData) }
+
+        observer.onNext(data)
+        observer.onCompleted()
+      }
+
+      task.resume()
+
+      return Disposables.create { task.cancel() }
     }
   }
 }

@@ -23,6 +23,10 @@ class OpenWeatherMapClient {
 
 extension OpenWeatherMapClient: FiveDaysForecastAPI {
   func fiveDaysForecast(for city: String) async throws -> FiveDaysForecast {
-    try await networkService.request(FiveDaysForecastEndpoint(city: city)).value
+    try await networkService.request(from: FiveDaysForecastEndpoint(city: city)).value
+  }
+
+  func data(from icon: String) async throws -> Data {
+    try await networkService.data(from: WeatherIconEndpoint(icon: icon)).asSingle().value
   }
 }

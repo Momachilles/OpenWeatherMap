@@ -19,7 +19,7 @@ protocol Endpoint {
   var baseURLString: String { get }
   var path: String { get }
   var method: Method { get }
-  var queryParameters: [String: String] { get }
+  var queryParameters: [String: String]? { get }
 }
 
 protocol URLRequestable {

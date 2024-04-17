@@ -26,6 +26,7 @@
 		4E19BE292BCD8DE900063AC5 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E19BE282BCD8DE900063AC5 /* Endpoint.swift */; };
 		4E19BE2B2BCE5AB300063AC5 /* OpenWeatherMapEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E19BE2A2BCE5AB300063AC5 /* OpenWeatherMapEndpoint.swift */; };
 		4E19BE2E2BCE5AE600063AC5 /* FiveDaysForecastEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E19BE2D2BCE5AE600063AC5 /* FiveDaysForecastEndpoint.swift */; };
+		4E19BE322BCEEDEF00063AC5 /* WeatherIconEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E19BE312BCEEDEF00063AC5 /* WeatherIconEndpoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		4E19BE282BCD8DE900063AC5 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		4E19BE2A2BCE5AB300063AC5 /* OpenWeatherMapEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherMapEndpoint.swift; sourceTree = "<group>"; };
 		4E19BE2D2BCE5AE600063AC5 /* FiveDaysForecastEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDaysForecastEndpoint.swift; sourceTree = "<group>"; };
+		4E19BE312BCEEDEF00063AC5 /* WeatherIconEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherIconEndpoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				4E19BE2D2BCE5AE600063AC5 /* FiveDaysForecastEndpoint.swift */,
+				4E19BE312BCEEDEF00063AC5 /* WeatherIconEndpoint.swift */,
 			);
 			path = Endpoints;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				4E19BE0A2BCD74FB00063AC5 /* FiveDaysForecast.swift in Sources */,
 				4E19BE2E2BCE5AE600063AC5 /* FiveDaysForecastEndpoint.swift in Sources */,
 				4E19BE262BCD8B9100063AC5 /* NetworkService.swift in Sources */,
+				4E19BE322BCEEDEF00063AC5 /* WeatherIconEndpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
