@@ -49,15 +49,7 @@ struct FiveDaysForecastView: View {
               Text(date)
               .font(.title2)
             ) {
-              ForEach(forecasts, id: \.dt) { forecast in
-                HStack(alignment: .center) {
-                  Text(forecast.dt.timeString)
-                  Spacer()
-                  Text(forecast.weather[0].main)
-                  Spacer()
-                  Text("\(Int(forecast.main.temp)) ºC")
-                }
-              }
+              FiveDaysForecastDayView(forecasts: forecasts)
             }
           }
         }
