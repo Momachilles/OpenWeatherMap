@@ -8,11 +8,17 @@
 import SwiftUI
 
 struct DayForecastView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+  var forecast: FiveDaysForecast.Forecast
+
+  var body: some View {
+    List {
+      Text("Hello")
     }
+    .navigationTitle(forecast.dt.forecastDateFormatted)
+  }
 }
 
-#Preview {
-    DayForecastView()
-}
+/*
+ #Preview {
+ DayForecastView()
+ } */

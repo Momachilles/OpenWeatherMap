@@ -21,41 +21,45 @@ struct FiveDaysForecastView: View {
   @State private var city: String = "Paris"
 
   var body: some View {
-    VStack {
-      HStack {
-        TextField("Enter city", text: $city)
+    NavigationView {
+      VStack {
+        HStack {
+          TextField("Enter city", text: $city)
+            .padding()
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .autocapitalization(.words)
+
+          Button("Forecast") {
+            forecast()
+          }
+          .buttonStyle(RoundedRectangleButtonStyle())
           .padding()
-          .textFieldStyle(RoundedBorderTextFieldStyle())
-          .autocapitalization(.words)
-
-        Button("Fetch Weather") {
-          forecast()
         }
-        .padding()
-      }
 
-      switch viewState {
-      case .start: EmptyView()
-      case .loading:
-        Text("Loading five days forecast for \(city)...")
-        ProgressView()
-      case .error(let errorMessage):
-        Text("Error: \(errorMessage)")
-          .foregroundColor(.red)
-      case .forecast(let fiveDaysForecast):
-        List {
-          ForEach(fiveDaysForecast.groupedList, id: \.date) { date, forecasts in
-            Section(header:
-              Text(date)
-              .font(.title2)
-            ) {
-              FiveDaysForecastDayView(forecasts: forecasts)
+        switch viewState {
+        case .start: EmptyView()
+        case .loading:
+          Text("Loading five days forecast for \(city)...")
+          ProgressView()
+        case .error(let errorMessage):
+          Text("Error: \(errorMessage)")
+            .foregroundColor(.red)
+        case .forecast(let fiveDaysForecast):
+          List {
+            ForEach(fiveDaysForecast.groupedList, id: \.date) { date, forecasts in
+              Section(header:
+                        Text(date)
+                .font(.title2)
+              ) {
+                FiveDaysForecastDayView(forecasts: forecasts)
+              }
             }
           }
         }
-      }
 
-      Spacer()
+        Spacer()
+      }
+      .navigationTitle("Five Days Forecast")
     }
   }
 
@@ -74,30 +78,4 @@ struct FiveDaysForecastView: View {
 #Preview {
   FiveDaysForecastView()
     .environment(OpenWeatherMapClient(networkService: NetworkService()))
-}
-
-extension TimeInterval {
-  var forecastDateFormatted: String {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .short
-
-    return formatter.string(from: Date(timeIntervalSince1970: self))
-  }
-
-  var dateString: String {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .none
-
-    return formatter.string(from: Date(timeIntervalSince1970: self))
-  }
-
-  var timeString: String {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .none
-    formatter.timeStyle = .short
-
-    return formatter.string(from: Date(timeIntervalSince1970: self))
-  }
 }

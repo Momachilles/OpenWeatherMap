@@ -12,7 +12,11 @@ struct FiveDaysForecastDayView: View {
   
   var body: some View {
     ForEach(forecasts, id: \.dt) { forecast in
-      FiveDaysForecastRowView(forecast: forecast)
+      NavigationLink {
+        DayForecastView(forecast: forecast)
+      } label: {
+        FiveDaysForecastRowView(forecast: forecast)
+      }
     }
   }
 }
