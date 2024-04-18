@@ -1,5 +1,5 @@
 //
-//  DayForecastView.swift
+//  DetailForecastView.swift
 //  OpenWeatherMap
 //
 //  Created by David Alarcon on 17/4/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DayForecastView: View {
+struct DetailForecastView: View {
   var forecast: FiveDaysForecast.Forecast
 
   var body: some View {
