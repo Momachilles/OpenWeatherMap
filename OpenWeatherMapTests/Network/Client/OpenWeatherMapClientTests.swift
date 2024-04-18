@@ -35,16 +35,6 @@ final class OpenWeatherMapClientTests: XCTestCase {
   }
 }
 
-extension DummyFiveDaysForecastLoader { // TODO: Delete
-  static func loadJSONData() throws -> Data? {
-    guard let url = Bundle.main.url(forResource: "FiveDaysForecast", withExtension: "json") else {
-      throw NSError(domain: "DummyFiveDaysForecastLoader", code: 404, userInfo: [NSLocalizedDescriptionKey: "File not found"])
-    }
-    
-    return try Data(contentsOf: url)
-  }
-}
-
 extension FiveDaysForecast: Equatable {
   public static func == (lhs: OpenWeatherMap.FiveDaysForecast, rhs: OpenWeatherMap.FiveDaysForecast) -> Bool {
     lhs.cod == rhs.cod
