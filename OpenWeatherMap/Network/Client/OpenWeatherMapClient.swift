@@ -10,6 +10,7 @@ import RxSwift
 
 protocol FiveDaysForecastAPI {
   func fiveDaysForecast(for city: String) async throws -> FiveDaysForecast
+  func data(from icon: String) async throws -> Data
 }
 
 @Observable

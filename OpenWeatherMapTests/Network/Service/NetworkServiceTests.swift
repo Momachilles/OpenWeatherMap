@@ -364,16 +364,6 @@ extension NetworkServiceTests {
 
 }
 
-extension DummyFiveDaysForecastLoader { // TODO: Delete
-  static func loadJSONData() throws -> Data? {
-    guard let url = Bundle.main.url(forResource: "FiveDaysForecast", withExtension: "json") else {
-      throw NSError(domain: "DummyFiveDaysForecastLoader", code: 404, userInfo: [NSLocalizedDescriptionKey: "File not found"])
-    }
-
-    return try Data(contentsOf: url)
-  }
-}
-
 extension NetworkError: Equatable {
   public static func == (lhs: NetworkError, rhs: NetworkError) -> Bool {
     switch (lhs, rhs) {
