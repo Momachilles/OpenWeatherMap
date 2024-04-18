@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FiveDaysForecastRowView: View {
-  var forecast: FiveDaysForecast.Forecast
+  var forecast: FiveDaysForecast.Forecast = try! DummyFiveDaysForecastLoader.loadDummyForecast().list.first!
   
   var body: some View {
     HStack(alignment: .center) {
@@ -26,7 +26,16 @@ struct FiveDaysForecastRowView: View {
   }
 }
 
-/*
-#Preview {
-  FiveDaysForecastRowView(forecast: )
-} */
+#Preview("First forecast") {
+  if let forecast = try? DummyFiveDaysForecastLoader.loadDummyForecast().list.first {
+    return FiveDaysForecastRowView(forecast: forecast)
+      .environment(OpenWeatherMapClient(networkService: NetworkService()))
+  } else { return Text("Something went wrong.") }
+}
+
+#Preview("Second forecast") {
+  if let forecast = try? DummyFiveDaysForecastLoader.loadDummyForecast().list[1] {
+    return FiveDaysForecastRowView(forecast: forecast)
+      .environment(OpenWeatherMapClient(networkService: NetworkService()))
+  } else { return Text("Something went wrong.") }
+}
