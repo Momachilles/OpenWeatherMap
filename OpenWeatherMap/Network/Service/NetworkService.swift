@@ -23,6 +23,12 @@ protocol NetworkServiceProtocol {
 }
 
 class NetworkService: NetworkServiceProtocol {
+  private let session: URLSession
+
+  init(configuration: URLSessionConfiguration = URLSessionConfiguration.default) {
+    self.session = URLSession(configuration: configuration)
+  }
+
   func request<T: Decodable>(from requestConvertible: any URLRequestable) -> Single<T> {
     return Single.create { single in
       guard let urlRequest = requestConvertible.urlRequest else {
