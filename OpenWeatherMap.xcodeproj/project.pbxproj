@@ -35,6 +35,10 @@
 		4E3CB8E62BD00F5E0028DCA4 /* RoundedRectangleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3CB8E52BD00F5E0028DCA4 /* RoundedRectangleButtonStyle.swift */; };
 		4E3CB8E92BD012B80028DCA4 /* FiveDaysForecast.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E3CB8E82BD012B80028DCA4 /* FiveDaysForecast.json */; };
 		4E3CB8EC2BD015BA0028DCA4 /* DummyFiveDaysForecastLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3CB8EB2BD015BA0028DCA4 /* DummyFiveDaysForecastLoader.swift */; };
+		4E487DC52BD0F7180071371D /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E487DC42BD0F7180071371D /* NetworkServiceTests.swift */; };
+		4E487DC82BD0F8BF0071371D /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E487DC72BD0F8BF0071371D /* MockURLProtocol.swift */; };
+		4E487DCB2BD0FA680071371D /* DummyEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E487DCA2BD0FA680071371D /* DummyEndpoint.swift */; };
+		4E487DCD2BD108870071371D /* DummyTestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E487DCC2BD108870071371D /* DummyTestModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +85,10 @@
 		4E3CB8E52BD00F5E0028DCA4 /* RoundedRectangleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedRectangleButtonStyle.swift; sourceTree = "<group>"; };
 		4E3CB8E82BD012B80028DCA4 /* FiveDaysForecast.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FiveDaysForecast.json; sourceTree = "<group>"; };
 		4E3CB8EB2BD015BA0028DCA4 /* DummyFiveDaysForecastLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyFiveDaysForecastLoader.swift; sourceTree = "<group>"; };
+		4E487DC42BD0F7180071371D /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
+		4E487DC72BD0F8BF0071371D /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		4E487DCA2BD0FA680071371D /* DummyEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyEndpoint.swift; sourceTree = "<group>"; };
+		4E487DCC2BD108870071371D /* DummyTestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyTestModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +168,7 @@
 		4E19BDEC2BCD3CBC00063AC5 /* OpenWeatherMapTests */ = {
 			isa = PBXGroup;
 			children = (
+				4E487DC22BD0F6FE0071371D /* Network */,
 				4E19BDED2BCD3CBC00063AC5 /* OpenWeatherMapTests.swift */,
 			);
 			path = OpenWeatherMapTests;
@@ -287,6 +296,57 @@
 				4E3CB8EB2BD015BA0028DCA4 /* DummyFiveDaysForecastLoader.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		4E487DC22BD0F6FE0071371D /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				4E487DCE2BD10A3C0071371D /* Dummies */,
+				4E487DC62BD0F8A90071371D /* Mocks */,
+				4E487DC32BD0F7030071371D /* Service */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		4E487DC32BD0F7030071371D /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				4E487DC42BD0F7180071371D /* NetworkServiceTests.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		4E487DC62BD0F8A90071371D /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				4E487DC72BD0F8BF0071371D /* MockURLProtocol.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		4E487DC92BD0FA530071371D /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				4E487DCA2BD0FA680071371D /* DummyEndpoint.swift */,
+			);
+			path = Endpoints;
+			sourceTree = "<group>";
+		};
+		4E487DCE2BD10A3C0071371D /* Dummies */ = {
+			isa = PBXGroup;
+			children = (
+				4E487DCF2BD10A4A0071371D /* Model */,
+				4E487DC92BD0FA530071371D /* Endpoints */,
+			);
+			path = Dummies;
+			sourceTree = "<group>";
+		};
+		4E487DCF2BD10A4A0071371D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4E487DCC2BD108870071371D /* DummyTestModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -454,7 +514,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E487DC82BD0F8BF0071371D /* MockURLProtocol.swift in Sources */,
+				4E487DC52BD0F7180071371D /* NetworkServiceTests.swift in Sources */,
 				4E19BDEE2BCD3CBC00063AC5 /* OpenWeatherMapTests.swift in Sources */,
+				4E487DCD2BD108870071371D /* DummyTestModel.swift in Sources */,
+				4E487DCB2BD0FA680071371D /* DummyEndpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
