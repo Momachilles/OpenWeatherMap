@@ -14,9 +14,8 @@ final class NetworkServiceTests: XCTestCase {
     func testNetworkServiceWhenSuccessfulResponse() throws {
       /// Given
       let sut = NetworkServiceTests.mockNetworkService()
-      
-      guard let response = try? NetworkServiceTests.successfullResponse()
-      else { return XCTFail("Something went wrong.") }
+      let succesfullMessage = "Test Succesfull"
+      guard let response = try? NetworkServiceTests.successfullResponse(with: succesfullMessage) else { return XCTFail("Something went wrong.") }
       MockURLProtocol.mockResponses = response
       
       /// When
@@ -26,7 +25,7 @@ final class NetworkServiceTests: XCTestCase {
       /// Then
       _ = single.subscribe { event in
         switch event {
-        case .success(let response): XCTAssertEqual(response.message, "Success")
+        case .success(let response): XCTAssertEqual(response.message, succesfullMessage)
         case .failure(let error): XCTFail("Request failed with error: \(error)")
         }
         expectation.fulfill()
@@ -46,10 +45,10 @@ extension NetworkServiceTests {
     return NetworkService(configuration: configuration)
   }
   
-  static func successfullResponse() throws -> [URL: (Data?, URLResponse?, Error?)]? {
+  static func successfullResponse(with message: String = "Success") throws -> [URL: (Data?, URLResponse?, Error?)]? {
     guard let url = DummyEndpoint().urlRequest?.url else { throw NetworkError.invalidURL }
           
-    let expectedData = DummyTestModel(message: "Success").json.data(using: .utf8)
+    let expectedData = DummyTestModel(message: message).json.data(using: .utf8)
     let expectedResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)
     
     return [url: (expectedData, expectedResponse, .none)]
