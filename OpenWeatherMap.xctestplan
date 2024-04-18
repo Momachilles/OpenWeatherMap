@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "6EC43982-D43E-403E-8FD4-4F2FC7A138EF",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:OpenWeatherMap.xcodeproj",
+      "identifier" : "4E19BDD82BCD3CBB00063AC5",
+      "name" : "OpenWeatherMap"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:OpenWeatherMap.xcodeproj",
+        "identifier" : "4E19BDE82BCD3CBC00063AC5",
+        "name" : "OpenWeatherMapTests"
+      }
+    }
+  ],
+  "version" : 1
+}
