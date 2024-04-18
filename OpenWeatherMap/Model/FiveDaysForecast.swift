@@ -18,14 +18,26 @@ struct FiveDaysForecast: Codable {
   let list: [Forecast]
   let city: City
   
-  struct Forecast: Codable {
+  struct Forecast: Codable, Hashable {
+    
+    static func == (lhs: Forecast, rhs: Forecast) -> Bool {
+      lhs.dt == rhs.dt
+    }
+    
+    func hash(into hasher: inout Hasher) {
+      hasher.combine(dt)
+      hasher.combine(dt_txt)
+    }
+    
     let dt: TimeInterval
     let main: Main
     let weather: [WeatherDescription]
     let clouds: Clouds
     let wind: Wind
-    let visibility: Int
+    let visibility: Int?
     let pop: Double
+    var rain: Rain?
+    let snow: Snow?
     let sys: Sys
     let dt_txt: String
     
@@ -60,6 +72,22 @@ struct FiveDaysForecast: Codable {
     
     struct Sys: Codable {
       let pod: String
+    }
+    
+    struct Rain: Codable {
+      let treeHours: Double
+      
+      private enum CodingKeys: String, CodingKey {
+        case treeHours = "3h"
+      }
+    }
+    
+    struct Snow: Codable {
+      let treeHours: Double
+      
+      private enum CodingKeys: String, CodingKey {
+        case treeHours = "3h"
+      }
     }
   }
   
