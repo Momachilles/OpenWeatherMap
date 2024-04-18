@@ -44,7 +44,7 @@ class NetworkService: NetworkServiceProtocol {
           return single(.failure(NetworkError.invalidResponse(response)))
         }
 
-        guard let data = data else { return single(.failure(NetworkError.emptyData)) }
+        guard let data = data, !data.isEmpty else { return single(.failure(NetworkError.emptyData)) }
 
         do {
           let decodedResponse = try JSONDecoder().decode(T.self, from: data)

@@ -39,7 +39,7 @@ final class NetworkServiceTests: XCTestCase {
     let sut = NetworkServiceTests.mockNetworkService()
 
     /// When
-    let expectation = XCTestExpectation(description: "Request completes successfully")
+    let expectation = XCTestExpectation(description: "Request completes with failure")
     let single = sut.request(from: DummyInvalidURLEndpoint()) as Single<DummyTestModel>
 
     /// Then
@@ -48,6 +48,125 @@ final class NetworkServiceTests: XCTestCase {
       case .success: XCTFail("Request should have failed with invalid URL error")
       case .failure(let error):
         XCTAssertEqual(error as? NetworkError, NetworkError.invalidURL)
+      }
+      expectation.fulfill()
+    }
+
+    wait(for: [expectation], timeout: 1.0)
+  }
+
+  func testNetworkServiceWhenFailureResponseAsRequestFailed() {
+    /// Given
+    let sut = NetworkServiceTests.mockNetworkService()
+    guard let response = try? NetworkServiceTests.failureRequest(with: NetworkError.invalidURL) else { return XCTFail("Something went wrong.") }
+    MockURLProtocol.mockResponses = response
+
+    /// When
+    let expectation = XCTestExpectation(description: "Request completes with failure")
+    let single = sut.request(from: DummyEndpoint()) as Single<DummyTestModel>
+
+    /// Then
+    _ = single.subscribe { event in
+      switch event {
+      case .success: XCTFail("Request should have failed with invalid URL error")
+      case .failure(let error):
+        XCTAssertEqual(error as? NetworkError, NetworkError.requestFailed(NetworkError.invalidURL))
+      }
+      expectation.fulfill()
+    }
+
+    wait(for: [expectation], timeout: 1.0)
+  }
+
+  func testNetworkServiceWhenFailureResponseAsInvalidResponse() {
+    /// Given
+    let sut = NetworkServiceTests.mockNetworkService()
+    guard let response = try? NetworkServiceTests.failureRequest() else { return XCTFail("Something went wrong.") }
+    MockURLProtocol.mockResponses = response
+
+    /// When
+    let expectation = XCTestExpectation(description: "Request completes with failure")
+    let single = sut.request(from: DummyEndpoint()) as Single<DummyTestModel>
+
+    /// Then
+    _ = single.subscribe { event in
+      switch event {
+      case .success: XCTFail("Request should have failed with invalid URL error")
+      case .failure(let error):
+        XCTAssertEqual(error as? NetworkError, NetworkError.invalidResponse(.none))
+      }
+      expectation.fulfill()
+    }
+
+    wait(for: [expectation], timeout: 1.0)
+  }
+
+  func testNetworkServiceWhenFailureResponseAsInvalidResponseByStatusCode() {
+    /// Given
+    let sut = NetworkServiceTests.mockNetworkService()
+    guard
+      let url = DummyEndpoint().urlRequest?.url,
+      let expectedResponse = HTTPURLResponse(url: url, statusCode: 401, httpVersion: nil, headerFields: nil),
+      let response = try? NetworkServiceTests.failureResponse(with: expectedResponse)
+    else { return XCTFail("Something went wrong.") }
+    MockURLProtocol.mockResponses = response
+
+    /// When
+    let expectation = XCTestExpectation(description: "Request completes with failure")
+    let single = sut.request(from: DummyEndpoint()) as Single<DummyTestModel>
+
+    /// Then
+    _ = single.subscribe { event in
+      switch event {
+      case .success: XCTFail("Request should have failed with invalid response")
+      case .failure(let error):
+        XCTAssertEqual(error as? NetworkError, NetworkError.invalidResponse(expectedResponse))
+      }
+      expectation.fulfill()
+    }
+
+    wait(for: [expectation], timeout: 1.0)
+  }
+
+  func testNetworkServiceWhenFailureResponseAsEmptyData() {
+    /// Given
+    let sut = NetworkServiceTests.mockNetworkService()
+    guard let response = try? NetworkServiceTests.failureResponseEmptyData() else { return XCTFail("Something went wrong.") }
+    MockURLProtocol.mockResponses = response
+
+    /// When
+    let expectation = XCTestExpectation(description: "Request completes with failure")
+    let single = sut.request(from: DummyEndpoint()) as Single<DummyTestModel>
+
+    /// Then
+    _ = single.subscribe { event in
+      switch event {
+      case .success: XCTFail("Request should have failed with empty data")
+      case .failure(let error):
+        XCTAssertEqual(error as? NetworkError, NetworkError.emptyData)
+      }
+      expectation.fulfill()
+    }
+
+    wait(for: [expectation], timeout: 1.0)
+  }
+
+  func testNetworkServiceWhenWhenFailureResponseAsInvalidJSON() {
+    /// Given
+    let succesfullMessage = "Test Failure"
+    guard let response = try? NetworkServiceTests.failureJSONResponse(with: succesfullMessage) else { return XCTFail("Something went wrong.") }
+    MockURLProtocol.mockResponses = response
+    let sut = NetworkServiceTests.mockNetworkService()
+
+    /// When
+    let expectation = XCTestExpectation(description: "Request completes with failure")
+    let single = sut.request(from: DummyEndpoint()) as Single<DummyTestModel>
+
+    /// Then
+    _ = single.subscribe { event in
+      switch event {
+      case .success: XCTFail("Request should have failed with invalid JSON")
+      case .failure(let error): XCTAssertEqual(error as? NetworkError, NetworkError.invalidJSON(NetworkError.invalidURL))
       }
       expectation.fulfill()
     }
@@ -75,12 +194,35 @@ extension NetworkServiceTests {
     return [url: (expectedData, expectedResponse, .none)]
   }
 
-  /*
-  static func failureURLResponse() throws -> [URL: (Data?, URLResponse?, Error?)]? {
-    guard let url = URL(string: "http://test.com/this/is/a/test") else { throw NetworkError.invalidURL }
+  static func failureRequest(with error: Error? = .none) throws -> [URL: (Data?, URLResponse?, Error?)]? {
+    guard let url = DummyEndpoint().urlRequest?.url else { throw NetworkError.invalidURL }
 
-    return [url: (.none, .none, NetworkError.invalidURL)]
-  } */
+    return [url: (.none, .none, error)]
+  }
+
+  static func failureResponse(with response: HTTPURLResponse) throws -> [URL: (Data?, URLResponse?, Error?)]? {
+    guard let url = DummyEndpoint().urlRequest?.url else { throw NetworkError.invalidURL }
+
+    return [url: (.none, response, .none)]
+  }
+
+  static func failureResponseEmptyData() throws -> [URL: (Data?, URLResponse?, Error?)]? {
+    guard let url = DummyEndpoint().urlRequest?.url else { throw NetworkError.invalidURL }
+
+    let expectedResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)
+
+    return [url: (.none, expectedResponse, .none)]
+  }
+
+  static func failureJSONResponse(with message: String = "Success") throws -> [URL: (Data?, URLResponse?, Error?)]? {
+    guard let url = DummyEndpoint().urlRequest?.url else { throw NetworkError.invalidURL }
+
+    let expectedData = DummyTestModel(message: message).invalidJson.data(using: .utf8)
+    let expectedResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)
+
+    return [url: (expectedData, expectedResponse, .none)]
+  }
+
 }
 
 extension DummyFiveDaysForecastLoader { // TODO: Delete

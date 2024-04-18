@@ -13,4 +13,5 @@ struct DummyTestModel: Codable {
 
 extension DummyTestModel {
   var json: String { "{\"message\": \"\(message)\"}"}
+  var invalidJson: String { "{\"invalidMessage\": \"\(message)\"}" }
 }
