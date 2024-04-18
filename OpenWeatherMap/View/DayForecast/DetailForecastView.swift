@@ -18,7 +18,16 @@ struct DetailForecastView: View {
   }
 }
 
-/*
- #Preview {
- DayForecastView()
- } */
+#Preview("First forecast") {
+  if let forecast = try? DummyFiveDaysForecastLoader.loadDummyForecast().list.first {
+    return DetailForecastView(forecast: forecast)
+      .environment(OpenWeatherMapClient(networkService: NetworkService()))
+  } else { return Text("Something went wrong.") }
+}
+
+#Preview("Second forecast") {
+  if let forecast = try? DummyFiveDaysForecastLoader.loadDummyForecast().list[1] {
+    return DetailForecastView(forecast: forecast)
+      .environment(OpenWeatherMapClient(networkService: NetworkService()))
+  } else { return Text("Something went wrong.") }
+}
