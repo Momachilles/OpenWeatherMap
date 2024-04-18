@@ -21,7 +21,7 @@ struct FiveDaysForecastView: View {
   @State private var city: String = "Paris"
 
   var body: some View {
-    NavigationView {
+    NavigationStack {
       VStack {
         HStack {
           TextField("Enter city", text: $city)
@@ -58,6 +58,9 @@ struct FiveDaysForecastView: View {
         }
 
         Spacer()
+      }
+      .navigationDestination(for: FiveDaysForecast.Forecast.self ) { forecast in
+        DetailForecastView(forecast: forecast)
       }
       .navigationTitle("Five Days Forecast")
     }

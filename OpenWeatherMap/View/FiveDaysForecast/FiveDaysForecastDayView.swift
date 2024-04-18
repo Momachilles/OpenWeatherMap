@@ -12,11 +12,11 @@ struct FiveDaysForecastDayView: View {
   
   var body: some View {
     ForEach(forecasts, id: \.dt) { forecast in
-      NavigationLink {
-        DetailForecastView(forecast: forecast)
-      } label: {
-        FiveDaysForecastRowView(forecast: forecast)
-      }
+      FiveDaysForecastRowView(forecast: forecast)
+        .background {
+          NavigationLink(value: forecast) {}
+            .opacity(.zero)
+        }
     }
   }
 }
