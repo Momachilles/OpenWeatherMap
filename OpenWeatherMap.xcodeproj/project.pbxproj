@@ -39,6 +39,8 @@
 		4E487DD12BD11ED30071371D /* DummyInvalidURLEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E487DD02BD11ED30071371D /* DummyInvalidURLEndpoint.swift */; };
 		4E487DD42BD131FC0071371D /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E487DD32BD131FC0071371D /* MockNetworkService.swift */; };
 		4E487DD92BD136B20071371D /* OpenWeatherMapClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E487DD82BD136B20071371D /* OpenWeatherMapClientTests.swift */; };
+		4E487DDB2BD157360071371D /* Double+OpenWeatherMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E487DDA2BD157360071371D /* Double+OpenWeatherMap.swift */; };
+		4E487DDD2BD15CA70071371D /* Int+OpenWeatherMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E487DDC2BD15CA70071371D /* Int+OpenWeatherMap.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +84,8 @@
 		4E487DD22BD1279A0071371D /* OpenWeatherMap.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = OpenWeatherMap.xctestplan; sourceTree = "<group>"; };
 		4E487DD32BD131FC0071371D /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
 		4E487DD82BD136B20071371D /* OpenWeatherMapClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherMapClientTests.swift; sourceTree = "<group>"; };
+		4E487DDA2BD157360071371D /* Double+OpenWeatherMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+OpenWeatherMap.swift"; sourceTree = "<group>"; };
+		4E487DDC2BD15CA70071371D /* Int+OpenWeatherMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+OpenWeatherMap.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +257,8 @@
 			isa = PBXGroup;
 			children = (
 				4E3CB8E32BD00EF80028DCA4 /* TimeInterval+OpenWeatherMap.swift */,
+				4E487DDA2BD157360071371D /* Double+OpenWeatherMap.swift */,
+				4E487DDC2BD15CA70071371D /* Int+OpenWeatherMap.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -452,9 +458,11 @@
 				4E19BE292BCD8DE900063AC5 /* Endpoint.swift in Sources */,
 				4E3CB8E12BD00A3C0028DCA4 /* DetailForecastView.swift in Sources */,
 				4E19BE172BCD857B00063AC5 /* OpenWeatherMapClient.swift in Sources */,
+				4E487DDD2BD15CA70071371D /* Int+OpenWeatherMap.swift in Sources */,
 				4E3CB8EC2BD015BA0028DCA4 /* DummyFiveDaysForecastLoader.swift in Sources */,
 				4E3CB8DA2BCFEFB60028DCA4 /* AsyncIconView.swift in Sources */,
 				4E19BDDD2BCD3CBB00063AC5 /* OpenWeatherMapApp.swift in Sources */,
+				4E487DDB2BD157360071371D /* Double+OpenWeatherMap.swift in Sources */,
 				4E19BE2B2BCE5AB300063AC5 /* OpenWeatherMapEndpoint.swift in Sources */,
 				4E19BE102BCD798500063AC5 /* FiveDaysForecastView.swift in Sources */,
 				4E3CB8E42BD00EF80028DCA4 /* TimeInterval+OpenWeatherMap.swift in Sources */,
