@@ -33,6 +33,7 @@ class NetworkService: NetworkServiceProtocol {
     return Single.create { single in
       guard let urlRequest = requestConvertible.urlRequest else {
         single(.failure(NetworkError.invalidURL))
+
         return Disposables.create()
       }
 
