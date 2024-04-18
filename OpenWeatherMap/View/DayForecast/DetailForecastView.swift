@@ -12,9 +12,82 @@ struct DetailForecastView: View {
 
   var body: some View {
     List {
-      Text("Hello")
+      Section {
+        HStack {
+          AsyncIconView(iconName: forecast.weather[.zero].icon)
+          VStack {
+            HStack {
+              Spacer()
+              Text(forecast.main.temp.temperatureString)
+                .font(.system(size: 60))
+              Spacer()
+            }
+            Text(forecast.weather.map { $0.main }.joined(separator: " | "))
+            HStack {
+              Spacer()
+              Text("Mn: \(forecast.main.temp_min.temperatureString)")
+              Text("Mx: \(forecast.main.temp_max.temperatureString)")
+              Spacer()
+            }
+          }
+          .fixedSize()
+        }
+      }
+      .background(Color.clear)
+      Section("Pressure") {
+        VStack {
+          HStack {
+            Spacer()
+            Text(forecast.main.pressure.pressureString)
+              .font(.title)
+            Spacer()
+          }
+          HStack {
+            Spacer()
+            Text("Sea: \(forecast.main.sea_level.pressureString)")
+            Text("Ground: \(forecast.main.grnd_level.pressureString)")
+            Spacer()
+          }
+        }
+      }
+      .headerProminence(.increased)
+      Section("Humidity:") {
+        VStack {
+          HStack {
+            Spacer()
+            Text(forecast.main.humidity.humnidityString)
+            Spacer()
+          }
+          .font(.title2)
+        }
+      }
+      .headerProminence(.increased)
+      Section("Wind") {
+        VStack {
+          HStack {
+            Text("Speed: \(forecast.wind.speed.speedString)")
+            Spacer()
+            Text("Degrees: \(forecast.wind.deg.degreesString)")
+          }
+          .font(.title3)
+        }
+      }
+      .headerProminence(.increased)
+      if let visibility = forecast.visibility?.distanceString {
+        Section("Visibility") {
+          VStack {
+            HStack {
+              Spacer()
+              Text(visibility)
+              Spacer()
+            }
+            .font(.title2)
+          }
+        }
+        .headerProminence(.increased)
+      }
     }
-    .navigationTitle(forecast.dt.forecastDateFormatted)
+    .listStyle(.insetGrouped)
   }
 }
 
