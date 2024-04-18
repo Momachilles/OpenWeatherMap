@@ -19,7 +19,7 @@ enum NetworkError: Error {
 
 protocol NetworkServiceProtocol {
   func request<T: Decodable>(from requestConvertible: URLRequestable) -> Single<T>
-  func data(from requestConvertible: URLRequestable) -> Observable<Data>
+  func data(from requestConvertible: URLRequestable) -> Single<Data>
 }
 
 class NetworkService: NetworkServiceProtocol {
@@ -60,25 +60,24 @@ class NetworkService: NetworkServiceProtocol {
     }
   }
 
-  func data(from requestConvertible: any URLRequestable) -> Observable<Data> {
-    return Observable.create { observer in
+  func data(from requestConvertible: any URLRequestable) -> Single<Data> {
+    return Single.create { single in
       guard let urlRequest = requestConvertible.urlRequest else {
-        observer.onError(NetworkError.invalidURL)
+        single(.failure(NetworkError.invalidURL))
 
         return Disposables.create()
       }
 
       let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-        if let error = error { return observer.onError(NetworkError.requestFailed(error)) }
+        if let error = error { return single(.failure(NetworkError.requestFailed(error))) }
 
         guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
-          return observer.onError(NetworkError.invalidResponse(response))
+          return single(.failure(NetworkError.invalidResponse(response)))
         }
 
-        guard let data = data else { return observer.onError(NetworkError.emptyData) }
+        guard let data = data, !data.isEmpty else { return single(.failure(NetworkError.emptyData)) }
 
-        observer.onNext(data)
-        observer.onCompleted()
+        single(.success(data))
       }
 
       task.resume()

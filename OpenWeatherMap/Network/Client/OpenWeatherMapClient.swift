@@ -27,6 +27,6 @@ extension OpenWeatherMapClient: FiveDaysForecastAPI {
   }
 
   func data(from icon: String) async throws -> Data {
-    try await networkService.data(from: WeatherIconEndpoint(icon: icon)).asSingle().value
+    try await networkService.data(from: WeatherIconEndpoint(icon: icon)).value
   }
 }
