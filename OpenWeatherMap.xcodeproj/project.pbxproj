@@ -30,9 +30,11 @@
 		4E3CB8DA2BCFEFB60028DCA4 /* AsyncIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3CB8D92BCFEFB60028DCA4 /* AsyncIconView.swift */; };
 		4E3CB8DC2BD006280028DCA4 /* FiveDaysForecastRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3CB8DB2BD006280028DCA4 /* FiveDaysForecastRowView.swift */; };
 		4E3CB8DE2BD0066F0028DCA4 /* FiveDaysForecastDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3CB8DD2BD0066F0028DCA4 /* FiveDaysForecastDayView.swift */; };
-		4E3CB8E12BD00A3C0028DCA4 /* DayForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3CB8E02BD00A3C0028DCA4 /* DayForecastView.swift */; };
+		4E3CB8E12BD00A3C0028DCA4 /* DetailForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3CB8E02BD00A3C0028DCA4 /* DetailForecastView.swift */; };
 		4E3CB8E42BD00EF80028DCA4 /* TimeInterval+OpenWeatherMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3CB8E32BD00EF80028DCA4 /* TimeInterval+OpenWeatherMap.swift */; };
 		4E3CB8E62BD00F5E0028DCA4 /* RoundedRectangleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3CB8E52BD00F5E0028DCA4 /* RoundedRectangleButtonStyle.swift */; };
+		4E3CB8E92BD012B80028DCA4 /* FiveDaysForecast.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E3CB8E82BD012B80028DCA4 /* FiveDaysForecast.json */; };
+		4E3CB8EC2BD015BA0028DCA4 /* DummyFiveDaysForecastLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3CB8EB2BD015BA0028DCA4 /* DummyFiveDaysForecastLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,9 +76,11 @@
 		4E3CB8D92BCFEFB60028DCA4 /* AsyncIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncIconView.swift; sourceTree = "<group>"; };
 		4E3CB8DB2BD006280028DCA4 /* FiveDaysForecastRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDaysForecastRowView.swift; sourceTree = "<group>"; };
 		4E3CB8DD2BD0066F0028DCA4 /* FiveDaysForecastDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDaysForecastDayView.swift; sourceTree = "<group>"; };
-		4E3CB8E02BD00A3C0028DCA4 /* DayForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayForecastView.swift; sourceTree = "<group>"; };
+		4E3CB8E02BD00A3C0028DCA4 /* DetailForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailForecastView.swift; sourceTree = "<group>"; };
 		4E3CB8E32BD00EF80028DCA4 /* TimeInterval+OpenWeatherMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+OpenWeatherMap.swift"; sourceTree = "<group>"; };
 		4E3CB8E52BD00F5E0028DCA4 /* RoundedRectangleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedRectangleButtonStyle.swift; sourceTree = "<group>"; };
+		4E3CB8E82BD012B80028DCA4 /* FiveDaysForecast.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FiveDaysForecast.json; sourceTree = "<group>"; };
+		4E3CB8EB2BD015BA0028DCA4 /* DummyFiveDaysForecastLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyFiveDaysForecastLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,10 +137,12 @@
 			isa = PBXGroup;
 			children = (
 				4E19BDDC2BCD3CBB00063AC5 /* OpenWeatherMapApp.swift */,
-				4E3CB8E22BD00EDB0028DCA4 /* Extensions */,
 				4E19BE0C2BCD794F00063AC5 /* View */,
 				4E19BE0B2BCD780E00063AC5 /* Network */,
 				4E19BE062BCD74AD00063AC5 /* Model */,
+				4E3CB8E22BD00EDB0028DCA4 /* Extensions */,
+				4E3CB8EA2BD0158B0028DCA4 /* Utils */,
+				4E3CB8E72BD011FA0028DCA4 /* Resources */,
 				4E19BDE02BCD3CBC00063AC5 /* Assets.xcassets */,
 				4E19BDE22BCD3CBC00063AC5 /* Preview Content */,
 			);
@@ -254,7 +260,7 @@
 		4E3CB8DF2BD00A1A0028DCA4 /* DayForecast */ = {
 			isa = PBXGroup;
 			children = (
-				4E3CB8E02BD00A3C0028DCA4 /* DayForecastView.swift */,
+				4E3CB8E02BD00A3C0028DCA4 /* DetailForecastView.swift */,
 			);
 			path = DayForecast;
 			sourceTree = "<group>";
@@ -265,6 +271,22 @@
 				4E3CB8E32BD00EF80028DCA4 /* TimeInterval+OpenWeatherMap.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4E3CB8E72BD011FA0028DCA4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4E3CB8E82BD012B80028DCA4 /* FiveDaysForecast.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		4E3CB8EA2BD0158B0028DCA4 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				4E3CB8EB2BD015BA0028DCA4 /* DummyFiveDaysForecastLoader.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -382,6 +404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E19BDE42BCD3CBC00063AC5 /* Preview Assets.xcassets in Resources */,
+				4E3CB8E92BD012B80028DCA4 /* FiveDaysForecast.json in Resources */,
 				4E19BDE12BCD3CBC00063AC5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,8 +434,9 @@
 				4E3CB8DC2BD006280028DCA4 /* FiveDaysForecastRowView.swift in Sources */,
 				4E3CB8DE2BD0066F0028DCA4 /* FiveDaysForecastDayView.swift in Sources */,
 				4E19BE292BCD8DE900063AC5 /* Endpoint.swift in Sources */,
-				4E3CB8E12BD00A3C0028DCA4 /* DayForecastView.swift in Sources */,
+				4E3CB8E12BD00A3C0028DCA4 /* DetailForecastView.swift in Sources */,
 				4E19BE172BCD857B00063AC5 /* OpenWeatherMapClient.swift in Sources */,
+				4E3CB8EC2BD015BA0028DCA4 /* DummyFiveDaysForecastLoader.swift in Sources */,
 				4E3CB8DA2BCFEFB60028DCA4 /* AsyncIconView.swift in Sources */,
 				4E19BDDD2BCD3CBB00063AC5 /* OpenWeatherMapApp.swift in Sources */,
 				4E19BE2B2BCE5AB300063AC5 /* OpenWeatherMapEndpoint.swift in Sources */,
